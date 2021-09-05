@@ -30,5 +30,7 @@ jobs:
           echo test, and deploy your project.
           
       - name: Run ansible playbook
+        env:
+          SECRET_1: ${{ secrets.SECRET_TEST }}
         run: |
           ansible-playbook ./ansible/test/site.yml -e test_1=1 -e test_2=2 -e secret_1=${{ secrets.SECRET_TEST }}
