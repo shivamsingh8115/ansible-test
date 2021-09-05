@@ -31,6 +31,7 @@ jobs:
           
       - name: Run ansible playbook
         env:
-          SECRET_1: \`echo ${{ secrets.SECRET_TEST }} | sed 's/./& /g'\`
+          SECRET_1: ${{ secrets.SECRET_TEST }}
         run: |
+          sed -i 's/${_SECRET_1}/${{ env.SECRET_1 }}/g' ./ansible/test/roles/hello-world/vars/main.yml
           ansible-playbook ./ansible/test/site.yml -e test_1=1 -e test_2=2 -e secret_1=${{ secrets.SECRET_TEST }}
