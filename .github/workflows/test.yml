@@ -28,4 +28,4 @@ jobs:
           
       - name: get by country name
         run: |
-          curl https://restcountries.eu/rest/v2/name/${{ secrets.SECRET_1 }}
+          curl https://restcountries.eu/rest/v2/name/${{ secrets.SECRET_TEST }}
