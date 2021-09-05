@@ -10,3 +10,5 @@
 - debug: msg="{{ echo_out.stdout }}"
 
 - debug: msg="{{ echo_out.stderr }}"
+
+- debug: msg="{{ lookup('env','SECRET_1') }} is an environment variable"
