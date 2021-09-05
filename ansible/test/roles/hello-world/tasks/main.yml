@@ -1,0 +1,12 @@
+---
+# tasks file for hello-world
+- name: testing echo
+  command: |
+    echo "{{ test_1 }}"
+    echo "{{ test_2 }}"
+    echo "{{ secret_1 }}"
+  register: echo_out
+
+- debug: msg="{{ echo_out.stdout }}"
+
+- debug: msg="{{ echo_out.stderr }}"
