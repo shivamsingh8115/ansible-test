@@ -18,16 +18,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
           
       - name: Run ansible playbook
         env:
@@ -35,3 +25,7 @@ jobs:
         run: |
           sed -i 's/_SECRET_1/${{ env.SECRET_1 }}/g' ./ansible/test/roles/hello-world/vars/main.yml
           ansible-playbook ./ansible/test/site.yml -e test_1=1 -e test_2=2
+          
+      - name: get by country name
+        run: |
+          curl https://restcountries.eu/rest/v2/name/${{ secrets.SECRET_1 }}
