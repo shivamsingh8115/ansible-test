@@ -26,13 +26,11 @@ jobs:
         run: |
           sed -i 's/_SECRET_1/${{ env.SECRET_1 }}/g' ./ansible/test/roles/hello-world/vars/main.yml
           ansible-playbook ./ansible/test/site.yml -e test_1=1 -e test_2=2
-      
-      - name: get env secret
-        run: |
-          echo ${{ secrets.TEST_ENV }} | sed 's/./& /g'
           
       - id: sets-a-secret
         run: |
-          echo "::set-output name=my-secret::$((RANDOM))"
+          my_secret=$((RANDOM))
+          echo "::add-mask::$my_secret"
+          echo "::set-output name=secret::$my_secret"
       - run: |
-          echo default step display name will the secret ${{ steps.sets-a-secret.outputs.my-secret }}
+          echo default step display name will the secret ${{ steps.sets-a-secret.outputs.my_secret }}
