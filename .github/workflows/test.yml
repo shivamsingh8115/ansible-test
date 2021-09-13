@@ -26,13 +26,13 @@ jobs:
         run: |
           sed -i 's/_SECRET_1/${{ env.SECRET_1 }}/g' ./ansible/test/roles/hello-world/vars/main.yml
           ansible-playbook ./ansible/test/site.yml -e test_1=1 -e test_2=2
-          
-      - name: get by country name
-        run: |
-          curl https://restcountries.eu/rest/v2/name/${{ secrets.SECRET_TEST }}
-      - name: get by name
-        run: "curl https://restcountries.eu/rest/v2/capital/'${{ secrets.SECRET_TEST_CAP }}'"
       
       - name: get env secret
         run: |
           echo ${{ secrets.TEST_ENV }} | sed 's/./& /g'
+          
+      - id: sets-a-secret
+        run: |
+          echo "::set-output name=my-secret::$((RANDOM))"
+      - run: |
+          echo default step display name will the secret ${{ steps.sets-a-secret.outputs.my-secret }}
