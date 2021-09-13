@@ -33,4 +33,4 @@ jobs:
           echo "::add-mask::$my_secret"
           echo "::set-output name=secret::$my_secret"
       - run: |
-          echo default step display name will the secret ${{ steps.sets-a-secret.outputs.my_secret }}
+          echo default step display name will the secret ${{ steps.sets-a-secret.outputs.secret }}
