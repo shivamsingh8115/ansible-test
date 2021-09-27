@@ -37,5 +37,14 @@ jobs:
       - id: ouput_1
         run: |
           echo "::set-output name=secret::testing"
+      - shell: bash
+        run: |
+          expr 3 + 7 > math-homework.txt
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: math-homework.txt
+          retention-days: 1
     outputs:
       output: "${{ steps.ouput_1.outputs.secret }}"
