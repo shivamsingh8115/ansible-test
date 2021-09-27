@@ -20,5 +20,19 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
           
-      - name: print env
-        run: ${{ needs.build.outputs.output }}
+      - name: Download math result for job 1
+        uses: actions/download-artifact@v2
+        with:
+          name: my-artifact
+      
+      - shell: bash
+        run: |
+          cat math-homework.txt
+      
+      - shell: bash
+        run: |
+          value=`cat math-homework.txt`
+          expr $value \* 9 > math-homework.txt
+      - shell: bash
+        run: |
+          cat math-homework.txt
