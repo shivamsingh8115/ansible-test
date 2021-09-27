@@ -34,5 +34,8 @@ jobs:
           echo "::set-output name=secret::$my_secret"
       - run: |
           echo default step display name will the secret ${{ steps.sets-a-secret.outputs.secret }}
+      - id: ouput_1
+        run: |
+          echo "::set-output name=secret::testing"
     outputs:
-      output: "${{ steps.sets-a-secret.outputs.secret }}"
+      output: "${{ steps.ouput_1.outputs.secret }}"
